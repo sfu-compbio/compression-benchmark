@@ -1,0 +1,396 @@
+Namespace(clear_cache=True, email='inumanag@icloud.com', force=False, glob='', input='/home/inumanag/snjofavac/git/compression-review/run/test_sam.sam', output_dir='', ref='/home/inumanag/snjofavac/git/compression-review/run/test.fa', rt=False, threads='1,4')
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
++                       test_sam with 1 threads                        + 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+######################################################################## 
+#                                 pigz                                 # 
+########################################################################
+>>> pigz (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam)
+*** 2016-03-26 12:07:33 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/pigz-2.3.3/pigz -c -p 1 
+    stdin:       /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam
+    stdout:      test_sam/output/compressed/pigz/test_sam.sam.gz
+    stderr:      test_sam/log/test_sam.sam.pigz.1.cmp.log
+  Process PID:   29897
+  Exit code:     0
+  Wall time:     00:00:00 (0.2 ms)
+  Memory (MB):   6.2
+  Resources:    
+    ru_utime:    00:00:00 (0.2 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   6328
+    ru_minflt:   1014
+    ru_oublock:  2112
+    ru_nvcsw:    3
+    ru_nivcsw:   3
+  GNU time:     
+    real:        00:00:00 (0.2 ms)
+    user:        00:00:00 (0.2 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     1.02 (1073658 bytes) (test_sam/output/compressed/pigz/test_sam.sam.gz)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:07:33 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/pigz-2.3.3/pigz -c -d -p 1
+    stdin:       test_sam/output/compressed/pigz/test_sam.sam.gz
+    stdout:      test_sam/output/decompressed/pigz/test_sam.sam.sam
+    stderr:      test_sam/log/test_sam.sam.pigz.1.dec.log
+  Process PID:   29904
+  Exit code:     0
+  Wall time:     00:00:00 (0.0 ms)
+  Memory (MB):   6.2
+  Resources:    
+    ru_utime:    00:00:00 (0.0 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   6360
+    ru_minflt:   879
+    ru_oublock:  8408
+    ru_nvcsw:    3
+    ru_nivcsw:   3
+  GNU time:     
+    real:        00:00:00 (0.0 ms)
+    user:        00:00:00 (0.0 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     4.10 (4299019 bytes) (test_sam/output/decompressed/pigz/test_sam.sam.sam)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+######################################################################## 
+#                               samtools                               # 
+########################################################################
+>>> samtools (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam)
+*** 2016-03-26 12:07:33 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/samtools/samtools view -b /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam -o test_sam/output/compressed/samtools/test_sam.sam.bam 
+    stderr:      test_sam/log/test_sam.sam.samtools.1.cmp.log
+  Process PID:   29911
+  Exit code:     0
+  Wall time:     00:00:00 (0.2 ms)
+  Memory (MB):   6.2
+  Resources:    
+    ru_utime:    00:00:00 (0.1 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   6364
+    ru_minflt:   2676
+    ru_oublock:  2224
+    ru_nvcsw:    45
+    ru_nivcsw:   5
+  GNU time:     
+    real:        00:00:00 (0.2 ms)
+    user:        00:00:00 (0.1 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     1.08 (1133889 bytes) (test_sam/output/compressed/samtools/test_sam.sam.bam)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:07:33 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/samtools/samtools view -h test_sam/output/compressed/samtools/test_sam.sam.bam -o test_sam/output/decompressed/samtools/test_sam.sam.sam
+    stderr:      test_sam/log/test_sam.sam.samtools.1.dec.log
+  Process PID:   29918
+  Exit code:     0
+  Wall time:     00:00:00 (0.1 ms)
+  Memory (MB):   6.2
+  Resources:    
+    ru_utime:    00:00:00 (0.0 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   6376
+    ru_minflt:   904
+    ru_oublock:  8416
+    ru_nvcsw:    152
+    ru_nivcsw:   5
+  GNU time:     
+    real:        00:00:00 (0.1 ms)
+    user:        00:00:00 (0.0 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     4.10 (4299019 bytes) (test_sam/output/decompressed/samtools/test_sam.sam.sam)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+######################################################################## 
+#                                 deez                                 # 
+########################################################################
+>>> deez (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam)
+*** 2016-03-26 12:07:34 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/deez/deez -v1 -t 1 -r /home/inumanag/snjofavac/git/compression-review/run/test.fa -! /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam -o test_sam/output/compressed/deez/test_sam.sam.dz 
+    stderr:      test_sam/log/test_sam.sam.deez.1.cmp.log
+  Process PID:   29925
+  Exit code:     0
+  Wall time:     00:00:00 (0.4 ms)
+  Memory (MB):   762.5
+  Resources:    
+    ru_utime:    00:00:00 (0.3 ms)
+    ru_stime:    00:00:00 (0.1 ms)
+    ru_maxrss:   780820
+    ru_minflt:   110942
+    ru_oublock:  2336
+    ru_nvcsw:    8
+    ru_nivcsw:   10
+  GNU time:     
+    real:        00:00:00 (0.4 ms)
+    user:        00:00:00 (0.3 ms)
+    sys:         00:00:00 (0.1 ms)
+  Size (MB):     1.13 (1181165 bytes) (test_sam/output/compressed/deez/test_sam.sam.dz)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:07:34 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/deez/deez -v1 -t 1 -r /home/inumanag/snjofavac/git/compression-review/run/test.fa -! test_sam/output/compressed/deez/test_sam.sam.dz -o test_sam/output/decompressed/deez/test_sam.sam.sam
+    stderr:      test_sam/log/test_sam.sam.deez.1.dec.log
+  Process PID:   29936
+  Exit code:     0
+  Wall time:     00:00:00 (0.4 ms)
+  Memory (MB):   757.6
+  Resources:    
+    ru_utime:    00:00:00 (0.3 ms)
+    ru_stime:    00:00:00 (0.1 ms)
+    ru_maxrss:   775760
+    ru_minflt:   111551
+    ru_oublock:  8424
+    ru_nvcsw:    6
+    ru_nivcsw:   8
+  GNU time:     
+    real:        00:00:00 (0.4 ms)
+    user:        00:00:00 (0.3 ms)
+    sys:         00:00:00 (0.1 ms)
+  Size (MB):     4.10 (4299019 bytes) (test_sam/output/decompressed/deez/test_sam.sam.sam)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+######################################################################## 
+#                              deez-qual                               # 
+########################################################################
+>>> deez-qual (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam)
+*** 2016-03-26 12:07:35 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/deez/deez -v1 -t 1 -r /home/inumanag/snjofavac/git/compression-review/run/test.fa -! /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam -o test_sam/output/compressed/deez-qual/test_sam.sam.dz -q1
+    stderr:      test_sam/log/test_sam.sam.deez-qual.1.cmp.log
+  Process PID:   29945
+  Exit code:     0
+  Wall time:     00:00:00 (0.5 ms)
+  Memory (MB):   1186.5
+  Resources:    
+    ru_utime:    00:00:00 (0.4 ms)
+    ru_stime:    00:00:00 (0.1 ms)
+    ru_maxrss:   1214928
+    ru_minflt:   111109
+    ru_oublock:  2528
+    ru_nvcsw:    8
+    ru_nivcsw:   11
+  GNU time:     
+    real:        00:00:00 (0.5 ms)
+    user:        00:00:00 (0.4 ms)
+    sys:         00:00:00 (0.1 ms)
+  Size (MB):     1.22 (1278086 bytes) (test_sam/output/compressed/deez-qual/test_sam.sam.dz)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:07:35 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/deez/deez -v1 -t 1 -r /home/inumanag/snjofavac/git/compression-review/run/test.fa -! test_sam/output/compressed/deez-qual/test_sam.sam.dz -o test_sam/output/decompressed/deez-qual/test_sam.sam.sam
+    stderr:      test_sam/log/test_sam.sam.deez-qual.1.dec.log
+  Process PID:   29956
+  Exit code:     0
+  Wall time:     00:00:00 (0.6 ms)
+  Memory (MB):   1181.1
+  Resources:    
+    ru_utime:    00:00:00 (0.4 ms)
+    ru_stime:    00:00:00 (0.1 ms)
+    ru_maxrss:   1209416
+    ru_minflt:   111633
+    ru_oublock:  8424
+    ru_nvcsw:    6
+    ru_nivcsw:   8
+  GNU time:     
+    real:        00:00:00 (0.6 ms)
+    user:        00:00:00 (0.4 ms)
+    sys:         00:00:00 (0.1 ms)
+  Size (MB):     4.10 (4299019 bytes) (test_sam/output/decompressed/deez-qual/test_sam.sam.sam)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+######################################################################## 
+#                              cramtools                               # 
+########################################################################
+>>> cramtools (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam)
+*** 2016-03-26 12:07:36 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 java -jar tools/cramtools/cramtools-2.1.jar cram --ignore-md5-mismatch --capture-all-tags --input-is-sam -Q -n -R /home/inumanag/snjofavac/git/compression-review/run/test.fa -I /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam -O test_sam/output/compressed/cramtools/test_sam.sam.cram 
+    stderr:      test_sam/log/test_sam.sam.cramtools.1.cmp.log
+  Process PID:   29965
+  Exit code:     0
+  Wall time:     00:00:01 (1.9 ms)
+  Memory (MB):   196.0
+  Resources:    
+    ru_utime:    00:00:01 (1.8 ms)
+    ru_stime:    00:00:00 (0.1 ms)
+    ru_maxrss:   200740
+    ru_minflt:   25651
+    ru_oublock:  1720
+    ru_nvcsw:    2865
+    ru_nivcsw:   1750
+  GNU time:     
+    real:        00:00:01 (1.9 ms)
+    user:        00:00:01 (1.8 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     0.80 (838605 bytes) (test_sam/output/compressed/cramtools/test_sam.sam.cram)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:07:38 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 java -jar tools/cramtools/cramtools-2.1.jar bam --ignore-md5-mismatch --print-sam-header -R /home/inumanag/snjofavac/git/compression-review/run/test.fa -I test_sam/output/compressed/cramtools/test_sam.sam.cram -O test_sam/output/decompressed/cramtools/test_sam.sam.sam
+    stderr:      test_sam/log/test_sam.sam.cramtools.1.dec.log
+  Process PID:   29991
+  Exit code:     0
+  Wall time:     00:00:00 (0.9 ms)
+  Memory (MB):   134.0
+  Resources:    
+    ru_utime:    00:00:00 (0.8 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   137232
+    ru_minflt:   13833
+    ru_oublock:  8096
+    ru_nvcsw:    2830
+    ru_nivcsw:   1284
+  GNU time:     
+    real:        00:00:00 (0.9 ms)
+    user:        00:00:00 (0.8 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     3.91 (4103829 bytes) (test_sam/output/decompressed/cramtools/test_sam.sam.sam)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
++                       test_sam with 4 threads                        + 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+######################################################################## 
+#                                 pigz                                 # 
+########################################################################
+>>> pigz (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam)
+*** 2016-03-26 12:07:39 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ tools/pigz-2.3.3/pigz -c -p 4 
+    stdin:       /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam
+    stdout:      test_sam/output/compressed/pigz/test_sam.sam.gz
+    stderr:      test_sam/log/test_sam.sam.pigz.4.cmp.log
+  Process PID:   30017
+  Exit code:     0
+  Wall time:     00:00:00 (0.0 ms)
+  Memory (MB):   6.2
+  Resources:    
+    ru_utime:    00:00:00 (0.1 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   6396
+    ru_minflt:   1386
+    ru_oublock:  2112
+    ru_nvcsw:    172
+    ru_nivcsw:   2
+  GNU time:     
+    real:        00:00:00 (0.0 ms)
+    user:        00:00:00 (0.1 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     1.02 (1073658 bytes) (test_sam/output/compressed/pigz/test_sam.sam.gz)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:07:39 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ tools/pigz-2.3.3/pigz -c -d -p 4
+    stdin:       test_sam/output/compressed/pigz/test_sam.sam.gz
+    stdout:      test_sam/output/decompressed/pigz/test_sam.sam.sam
+    stderr:      test_sam/log/test_sam.sam.pigz.4.dec.log
+  Process PID:   30029
+  Exit code:     0
+  Wall time:     00:00:00 (0.0 ms)
+  Memory (MB):   6.2
+  Resources:    
+    ru_utime:    00:00:00 (0.0 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   6396
+    ru_minflt:   723
+    ru_oublock:  8408
+    ru_nvcsw:    304
+    ru_nivcsw:   2
+  GNU time:     
+    real:        00:00:00 (0.0 ms)
+    user:        00:00:00 (0.0 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     4.10 (4299019 bytes) (test_sam/output/decompressed/pigz/test_sam.sam.sam)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+######################################################################## 
+#                                 deez                                 # 
+########################################################################
+>>> deez (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam)
+*** 2016-03-26 12:07:39 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ tools/deez/deez -v1 -t 4 -r /home/inumanag/snjofavac/git/compression-review/run/test.fa -! /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam -o test_sam/output/compressed/deez/test_sam.sam.dz 
+    stderr:      test_sam/log/test_sam.sam.deez.4.cmp.log
+  Process PID:   30039
+  Exit code:     0
+  Wall time:     00:00:00 (0.4 ms)
+  Memory (MB):   762.5
+  Resources:    
+    ru_utime:    00:00:00 (0.3 ms)
+    ru_stime:    00:00:00 (0.1 ms)
+    ru_maxrss:   780768
+    ru_minflt:   110389
+    ru_oublock:  2336
+    ru_nvcsw:    230
+    ru_nivcsw:   4
+  GNU time:     
+    real:        00:00:00 (0.4 ms)
+    user:        00:00:00 (0.3 ms)
+    sys:         00:00:00 (0.1 ms)
+  Size (MB):     1.13 (1181165 bytes) (test_sam/output/compressed/deez/test_sam.sam.dz)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:07:40 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ tools/deez/deez -v1 -t 4 -r /home/inumanag/snjofavac/git/compression-review/run/test.fa -! test_sam/output/compressed/deez/test_sam.sam.dz -o test_sam/output/decompressed/deez/test_sam.sam.sam
+    stderr:      test_sam/log/test_sam.sam.deez.4.dec.log
+  Process PID:   30062
+  Exit code:     0
+  Wall time:     00:00:00 (0.4 ms)
+  Memory (MB):   768.1
+  Resources:    
+    ru_utime:    00:00:00 (0.3 ms)
+    ru_stime:    00:00:00 (0.1 ms)
+    ru_maxrss:   786584
+    ru_minflt:   112604
+    ru_oublock:  8424
+    ru_nvcsw:    275
+    ru_nivcsw:   2
+  GNU time:     
+    real:        00:00:00 (0.3 ms)
+    user:        00:00:00 (0.3 ms)
+    sys:         00:00:00 (0.1 ms)
+  Size (MB):     4.10 (4299019 bytes) (test_sam/output/decompressed/deez/test_sam.sam.sam)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+######################################################################## 
+#                              deez-qual                               # 
+########################################################################
+>>> deez-qual (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam)
+*** 2016-03-26 12:07:40 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ tools/deez/deez -v1 -t 4 -r /home/inumanag/snjofavac/git/compression-review/run/test.fa -! /home/inumanag/snjofavac/git/compression-review/run/test_sam.sam -o test_sam/output/compressed/deez-qual/test_sam.sam.dz -q1
+    stderr:      test_sam/log/test_sam.sam.deez-qual.4.cmp.log
+  Process PID:   30077
+  Exit code:     0
+  Wall time:     00:00:00 (0.5 ms)
+  Memory (MB):   1186.5
+  Resources:    
+    ru_utime:    00:00:00 (0.4 ms)
+    ru_stime:    00:00:00 (0.1 ms)
+    ru_maxrss:   1214964
+    ru_minflt:   111061
+    ru_oublock:  2528
+    ru_nvcsw:    169
+    ru_nivcsw:   4
+  GNU time:     
+    real:        00:00:00 (0.5 ms)
+    user:        00:00:00 (0.4 ms)
+    sys:         00:00:00 (0.1 ms)
+  Size (MB):     1.22 (1278086 bytes) (test_sam/output/compressed/deez-qual/test_sam.sam.dz)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:07:41 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ tools/deez/deez -v1 -t 4 -r /home/inumanag/snjofavac/git/compression-review/run/test.fa -! test_sam/output/compressed/deez-qual/test_sam.sam.dz -o test_sam/output/decompressed/deez-qual/test_sam.sam.sam
+    stderr:      test_sam/log/test_sam.sam.deez-qual.4.dec.log
+  Process PID:   30100
+  Exit code:     0
+  Wall time:     00:00:00 (0.5 ms)
+  Memory (MB):   1191.8
+  Resources:    
+    ru_utime:    00:00:00 (0.4 ms)
+    ru_stime:    00:00:00 (0.2 ms)
+    ru_maxrss:   1220416
+    ru_minflt:   112690
+    ru_oublock:  8424
+    ru_nvcsw:    216
+    ru_nivcsw:   4
+  GNU time:     
+    real:        00:00:00 (0.5 ms)
+    user:        00:00:00 (0.4 ms)
+    sys:         00:00:00 (0.2 ms)
+  Size (MB):     4.10 (4299019 bytes) (test_sam/output/decompressed/deez-qual/test_sam.sam.sam)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+
+Done!

@@ -1,0 +1,12 @@
+DeeZ 0x20 (v1.9-beta2-7-g72390ec-dirty)
+File test_sam/output/decompressed/deez/test_sam.sam.sam already exists. Overwriting it.
+Decompressing test_sam/output/compressed/deez/test_sam.sam.dz to test_sam/output/decompressed/deez/test_sam.sam.sam ...
+File format: DZ v2.0
+Loaded reference file /home/inumanag/snjofavac/git/compression-review/run/test.fa
+Loaded reference index /home/inumanag/snjofavac/git/compression-review/run/test.fa.fai
+Using quality mode default
+	55.55% [Chr EcoliDH10B]
+Decompressed 9,996 records, 1 blocks
+
+################################################################################
+

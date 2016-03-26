@@ -1,0 +1,255 @@
+Namespace(clear_cache=True, email='inumanag@icloud.com', force=False, glob='', input='/home/inumanag/snjofavac/git/compression-review/run/test_fq.fq', output_dir='', ref='/home/inumanag/snjofavac/git/compression-review/run/test.fa', rt=False, threads='1,4')
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
++                        test_fq with 1 threads                        + 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+######################################################################## 
+#                                 pigz                                 # 
+########################################################################
+>>> pigz (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_fq.fq)
+*** 2016-03-26 12:09:34 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/pigz-2.3.3/pigz -c -p 1 
+    stdin:       /home/inumanag/snjofavac/git/compression-review/run/test_fq.fq
+    stdout:      test_fq/output/compressed/pigz/test_fq.fq.gz
+    stderr:      test_fq/log/test_fq.fq.pigz.1.cmp.log
+  Process PID:   30341
+  Exit code:     0
+  Wall time:     00:00:00 (0.1 ms)
+  Memory (MB):   6.2
+  Resources:    
+    ru_utime:    00:00:00 (0.1 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   6328
+    ru_minflt:   1012
+    ru_oublock:  1712
+    ru_nvcsw:    3
+    ru_nivcsw:   3
+  GNU time:     
+    real:        00:00:00 (0.1 ms)
+    user:        00:00:00 (0.1 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     0.83 (871595 bytes) (test_fq/output/compressed/pigz/test_fq.fq.gz)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:09:35 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/pigz-2.3.3/pigz -c -d -p 1
+    stdin:       test_fq/output/compressed/pigz/test_fq.fq.gz
+    stdout:      test_fq/output/decompressed/pigz/test_fq.fq.fq
+    stderr:      test_fq/log/test_fq.fq.pigz.1.dec.log
+  Process PID:   30348
+  Exit code:     0
+  Wall time:     00:00:00 (0.0 ms)
+  Memory (MB):   6.2
+  Resources:    
+    ru_utime:    00:00:00 (0.0 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   6364
+    ru_minflt:   877
+    ru_oublock:  6336
+    ru_nvcsw:    3
+    ru_nivcsw:   3
+  GNU time:     
+    real:        00:00:00 (0.0 ms)
+    user:        00:00:00 (0.0 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     3.09 (3236065 bytes) (test_fq/output/decompressed/pigz/test_fq.fq.fq)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+######################################################################## 
+#                            scalce-single                             # 
+########################################################################
+>>> scalce-single (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_fq.fq)
+*** 2016-03-26 12:09:35 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/scalce/scalce -T 1 /home/inumanag/snjofavac/git/compression-review/run/test_fq.fq -o test_fq/output/compressed/scalce-single/test_fq.fq.scalce-single 
+    stderr:      test_fq/log/test_fq.fq.scalce-single.1.cmp.log
+  Process PID:   30355
+  Exit code:     0
+  Wall time:     00:00:02 (2.8 ms)
+  Memory (MB):   1114.6
+  Resources:    
+    ru_utime:    00:00:02 (2.6 ms)
+    ru_stime:    00:00:00 (0.2 ms)
+    ru_maxrss:   1141360
+    ru_minflt:   245547
+    ru_oublock:  9328
+    ru_nvcsw:    5
+    ru_nivcsw:   12
+  GNU time:     
+    real:        00:00:02 (2.8 ms)
+    user:        00:00:02 (2.6 ms)
+    sys:         00:00:00 (0.2 ms)
+  Size (MB):     2.58 (2703226 bytes) (test_fq/output/compressed/scalce-single/test_fq.fq.scalce-single_1.scalcen, test_fq/output/compressed/scalce-single/test_fq.fq.scalce-single_1.scalceq, test_fq/output/compressed/scalce-single/test_fq.fq.scalce-single_1.scalcer)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:09:38 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/scalce/scalce -d -T 1 test_fq/output/compressed/scalce-single/test_fq.fq.scalce-single_1.scalcer -o test_fq/output/decompressed/scalce-single/test_fq.fq.fq
+    stderr:      test_fq/log/test_fq.fq.scalce-single.1.dec.log
+  Process PID:   30364
+  Exit code:     0
+  Wall time:     00:00:00 (0.9 ms)
+  Memory (MB):   996.2
+  Resources:    
+    ru_utime:    00:00:00 (0.7 ms)
+    ru_stime:    00:00:00 (0.2 ms)
+    ru_maxrss:   1020076
+    ru_minflt:   242413
+    ru_oublock:  6344
+    ru_nvcsw:    4
+    ru_nivcsw:   5
+  GNU time:     
+    real:        00:00:00 (0.9 ms)
+    user:        00:00:00 (0.7 ms)
+    sys:         00:00:00 (0.2 ms)
+  Size (MB):     3.09 (3236065 bytes) (test_fq/output/decompressed/scalce-single/test_fq.fq.fq_1.fastq)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+######################################################################## 
+#                              slimfastq                               # 
+########################################################################
+>>> slimfastq (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_fq.fq)
+*** 2016-03-26 12:09:39 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/slimfastq/slimfastq -u /home/inumanag/snjofavac/git/compression-review/run/test_fq.fq -f test_fq/output/compressed/slimfastq/test_fq.fq.slimfastq -O 
+    stderr:      test_fq/log/test_fq.fq.slimfastq.1.cmp.log
+  Process PID:   30372
+  Exit code:     0
+  Wall time:     00:00:00 (0.1 ms)
+  Memory (MB):   78.8
+  Resources:    
+    ru_utime:    00:00:00 (0.1 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   80648
+    ru_minflt:   2511
+    ru_oublock:  1424
+    ru_nvcsw:    3
+    ru_nivcsw:   3
+  GNU time:     
+    real:        00:00:00 (0.1 ms)
+    user:        00:00:00 (0.1 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     0.69 (720896 bytes) (test_fq/output/compressed/slimfastq/test_fq.fq.slimfastq)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:09:39 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ taskset -c 3 tools/slimfastq/slimfastq -d test_fq/output/compressed/slimfastq/test_fq.fq.slimfastq  test_fq/output/decompressed/slimfastq/test_fq.fq.fq -O
+    stderr:      test_fq/log/test_fq.fq.slimfastq.1.dec.log
+  Process PID:   30379
+  Exit code:     0
+  Wall time:     00:00:00 (0.1 ms)
+  Memory (MB):   78.8
+  Resources:    
+    ru_utime:    00:00:00 (0.1 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   80648
+    ru_minflt:   2481
+    ru_oublock:  6336
+    ru_nvcsw:    3
+    ru_nivcsw:   3
+  GNU time:     
+    real:        00:00:00 (0.1 ms)
+    user:        00:00:00 (0.1 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     3.09 (3236065 bytes) (test_fq/output/decompressed/slimfastq/test_fq.fq.fq)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
++                        test_fq with 4 threads                        + 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+######################################################################## 
+#                                 pigz                                 # 
+########################################################################
+>>> pigz (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_fq.fq)
+*** 2016-03-26 12:09:39 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ tools/pigz-2.3.3/pigz -c -p 4 
+    stdin:       /home/inumanag/snjofavac/git/compression-review/run/test_fq.fq
+    stdout:      test_fq/output/compressed/pigz/test_fq.fq.gz
+    stderr:      test_fq/log/test_fq.fq.pigz.4.cmp.log
+  Process PID:   30386
+  Exit code:     0
+  Wall time:     00:00:00 (0.0 ms)
+  Memory (MB):   6.2
+  Resources:    
+    ru_utime:    00:00:00 (0.1 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   6388
+    ru_minflt:   1391
+    ru_oublock:  1712
+    ru_nvcsw:    153
+    ru_nivcsw:   6
+  GNU time:     
+    real:        00:00:00 (0.0 ms)
+    user:        00:00:00 (0.1 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     0.83 (871595 bytes) (test_fq/output/compressed/pigz/test_fq.fq.gz)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:09:39 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ tools/pigz-2.3.3/pigz -c -d -p 4
+    stdin:       test_fq/output/compressed/pigz/test_fq.fq.gz
+    stdout:      test_fq/output/decompressed/pigz/test_fq.fq.fq
+    stderr:      test_fq/log/test_fq.fq.pigz.4.dec.log
+  Process PID:   30398
+  Exit code:     0
+  Wall time:     00:00:00 (0.0 ms)
+  Memory (MB):   6.2
+  Resources:    
+    ru_utime:    00:00:00 (0.0 ms)
+    ru_stime:    00:00:00 (0.0 ms)
+    ru_maxrss:   6392
+    ru_minflt:   721
+    ru_oublock:  6336
+    ru_nvcsw:    231
+    ru_nivcsw:   2
+  GNU time:     
+    real:        00:00:00 (0.0 ms)
+    user:        00:00:00 (0.0 ms)
+    sys:         00:00:00 (0.0 ms)
+  Size (MB):     3.09 (3236065 bytes) (test_fq/output/decompressed/pigz/test_fq.fq.fq)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+######################################################################## 
+#                            scalce-single                             # 
+########################################################################
+>>> scalce-single (File 1: /home/inumanag/snjofavac/git/compression-review/run/test_fq.fq)
+*** 2016-03-26 12:09:39 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ tools/scalce/scalce -T 4 /home/inumanag/snjofavac/git/compression-review/run/test_fq.fq -o test_fq/output/compressed/scalce-single/test_fq.fq.scalce-single 
+    stderr:      test_fq/log/test_fq.fq.scalce-single.4.cmp.log
+  Process PID:   30408
+  Exit code:     0
+  Wall time:     00:00:02 (2.9 ms)
+  Memory (MB):   1111.6
+  Resources:    
+    ru_utime:    00:00:02 (2.6 ms)
+    ru_stime:    00:00:00 (0.3 ms)
+    ru_maxrss:   1138256
+    ru_minflt:   481089
+    ru_oublock:  9096
+    ru_nvcsw:    16
+    ru_nivcsw:   6
+  GNU time:     
+    real:        00:00:02 (2.9 ms)
+    user:        00:00:02 (2.6 ms)
+    sys:         00:00:00 (0.3 ms)
+  Size (MB):     2.58 (2703727 bytes) (test_fq/output/compressed/scalce-single/test_fq.fq.scalce-single_1.scalcen, test_fq/output/compressed/scalce-single/test_fq.fq.scalce-single_1.scalceq, test_fq/output/compressed/scalce-single/test_fq.fq.scalce-single_1.scalcer)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+*** 2016-03-26 12:09:42 *** *** OK ***
+  Command:       /usr/bin/time -p -o _time_ tools/scalce/scalce -d -T 4 test_fq/output/compressed/scalce-single/test_fq.fq.scalce-single_1.scalcer -o test_fq/output/decompressed/scalce-single/test_fq.fq.fq
+    stderr:      test_fq/log/test_fq.fq.scalce-single.4.dec.log
+  Process PID:   30437
+  Exit code:     0
+  Wall time:     00:00:00 (0.9 ms)
+  Memory (MB):   995.7
+  Resources:    
+    ru_utime:    00:00:00 (0.7 ms)
+    ru_stime:    00:00:00 (0.2 ms)
+    ru_maxrss:   1019548
+    ru_minflt:   242608
+    ru_oublock:  6344
+    ru_nvcsw:    4
+    ru_nivcsw:   3
+  GNU time:     
+    real:        00:00:00 (0.9 ms)
+    user:        00:00:00 (0.7 ms)
+    sys:         00:00:00 (0.2 ms)
+  Size (MB):     3.09 (3236065 bytes) (test_fq/output/decompressed/scalce-single/test_fq.fq.fq_1.fastq)
+  Free space:      /dev/sda5       1.8T  1.4T  433G  76% /home/inumanag
+
+
+Done!

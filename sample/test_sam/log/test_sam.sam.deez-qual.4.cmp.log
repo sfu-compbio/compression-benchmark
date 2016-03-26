@@ -1,0 +1,51 @@
+DeeZ 0x20 (v1.9-beta2-7-g72390ec-dirty)
+File test_sam/output/compressed/deez-qual/test_sam.sam.dz already exists. Overwriting it.
+Loaded reference file /home/inumanag/snjofavac/git/compression-review/run/test.fa
+Loaded reference index /home/inumanag/snjofavac/git/compression-review/run/test.fa.fai
+Using quality mode samcomp
+	100.0% [Chr EcoliDH10B Block      1]
+Written 9,996 lines
+Paired 4,700 out of 9,996 reads
+Reference                       61
+  Fixes     :                   41
+  Fixes St  :                   11
+  Replace   :                    9
+Sequences                   19,021
+  Positions :                1,504 
+  Stitches  :                    0 
+  Opcode    :                   78 
+  SeqPos    :                8,109 
+  SeqLen    :                   34 
+  XLen      :                2,254 
+  HSLen     :                    0 
+  AnyLen    :                   14 
+  OPLen     :                2,919 
+  ACGTMiss  :                4,073 
+  ACGTIns   :                   18 
+  ACGTUnmap :                   18 
+Read Names                  34,083
+  Index     :                2,569
+  Content   :               24,690
+  Paired    :                6,824
+Flags                        4,131
+Map. Quals                     177
+Qualities                  658,568
+Paired End                   3,528
+  Diff      :                  505 
+  Chr       :                  305 
+  Template  :                  652 
+  Bits      :                2,066 
+Optionals                   32,469
+  Tags      :                  967
+  ASk       :               10,333
+  BCZ       :                   44
+  MDZ       :                   33
+  NMi       :                    0
+  RG^       :                   61
+  SMj       :                   65
+  SMk       :                9,186
+  XDZ       :               11,780
+XD stats: 1,411 failed out of 9,414
+
+################################################################################
+

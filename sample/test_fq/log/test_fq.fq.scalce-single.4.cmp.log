@@ -1,0 +1,30 @@
+SCALCE 1 [pthreads; available cores=5]
+Buffer size: 131072K, bucket storage size: 4194304K
+Allocating pool... OK!
+Preprocessing FASTQ files ...
+	Paired end #1, quality offset: 33
+	               read length: 150
+OK
+Using 4 threads...
+	Done with file /home/inumanag/snjofavac/git/compression-review/run/test_fq.fq, 9996 reads found
+	Created temp file 0
+Merging results ... 1
+Generating 1 scalce file(s) from temp #0 compression: pigz
+shrink factor for 0: 1
+	Read bit size:    paired end 0 = 0.10
+	Quality bit size: paired end 0 = 13.81
+Cleaning ...
+Statistics:
+	Total number of reads: 9996
+	Read length: first end 150
+	Unbucketed reads count: 0, bucketed percentage 100.00
+	Lossy percentage: 0
+	Time elapsed:     00:00:02
+	Compression time: 00:00:01
+	Original size: 3.08M, new size: 2.49M, compression factor: 1.24
+Done!
+
+################################################################################
+
+Written 375 cores
+

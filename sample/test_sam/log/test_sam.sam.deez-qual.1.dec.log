@@ -1,0 +1,11 @@
+DeeZ 0x20 (v1.9-beta2-7-g72390ec-dirty)
+Decompressing test_sam/output/compressed/deez-qual/test_sam.sam.dz to test_sam/output/decompressed/deez-qual/test_sam.sam.sam ...
+File format: DZ v2.0
+Loaded reference file /home/inumanag/snjofavac/git/compression-review/run/test.fa
+Loaded reference index /home/inumanag/snjofavac/git/compression-review/run/test.fa.fai
+Using quality mode samcomp
+	58.92% [Chr EcoliDH10B]
+Decompressed 9,996 records, 1 blocks
+
+################################################################################
+
