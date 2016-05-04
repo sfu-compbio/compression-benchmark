@@ -65,8 +65,9 @@ def execute(cmd, fin, fout, ferr, exclusive=False, single_thread=False):
 	if exclusive and single_thread: # requires root
 		cmd = 'chrt -f 99 ' + cmd
 	if single_thread: # bind to cpu #3 by default
-		cmd = 'taskset -c 3 ' + cmd
+		cmd = 'taskset 1 ' + cmd
 	cmd = '/usr/bin/time -p -o _time_ ' + cmd
+	print cmd, '<', fi, '>', fo
 
 	global proc
 	proc = sp.Popen(shlex.split(cmd), stdin=fi, stdout=fo, stderr=fe, env=os.environ.copy())
@@ -91,7 +92,11 @@ def execute(cmd, fin, fout, ferr, exclusive=False, single_thread=False):
 	with open('_time_') as ft:
 		for l in ft:
 			l = l.strip().split()
-			ru[-2].append((l[0], float(l[1])))
+			try:
+				t = (l[0], float(l[1]))	
+				ru[-2].append(t)
+			except ValueError:
+				pass
 	os.remove('_time_')
 
 	return ru
@@ -304,7 +309,7 @@ def get_sam_params(args, tool, params):
 def getargs():
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--input', '-i', help="Input file for sample (FASTQ, FASTA or SAM)")
-	#parser.add_argument('--glob', '-g', default='', help="Input files glob for multi-FASTQ samples")
+	parser.add_argument('--glob', '-g', default='', help="Input files glob for multi-FASTQ samples (NOT SUPPORTED!)")
 	parser.add_argument('--ref', '-r', help="Folder containing reference files")
 	parser.add_argument('--force', '-f', action='store_true', help="Re-run all tools")
  	parser.add_argument('--rt', '-R', action='store_true', help='Use SCHED_FIFO real-time priority (requires root)')
