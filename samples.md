@@ -5,7 +5,7 @@ All reference files should be pre-processed with `ref.py`, as explained in the [
 ### SAM Samples
 
 | Organism | Technology | Coverage | Uncompressed<br>size | Link | Reference |
-|-|-|-|-|-|
+|----------|------------|----------|----------------------|------|-----------|
 | *E.coli* | Illumina MiSeq | 490x | 5.2 GB | [MiSeq_Ecoli_DH10B_110721_PF](ftp://webdata:webdata@ussd-ftp.illumina.com/Data/SequencingRuns/DH10B/MiSeq_Ecoli_DH10B_110721_PF.bam)<sup> 1</sup> (1.3 GB) | [CP000948](http://www.ebi.ac.uk/ena/data/view/CP000948&display=fasta) |
 | *H.sapiens* | IonTorrent | 0.7x | 5.6 GB | [sample-2-10_sorted](ftp://ftp.sra.ebi.ac.uk/vol1/ERA229/ERA229587/bam/sample-2-10_sorted.bam) (1.4 GB) | [Homo_sapiens_assembly19](http://www.broadinstitute.org/ftp/pub/seq/references/Homo_sapiens_assembly19.fasta) |
 | *H.sapiens* | Illumina HiSeq | 2x | 20 GB | [9827_2#49](ftp://ftp.sra.ebi.ac.uk/vol1/ERA242/ERA242167/bam/9827_2%2349.bam) (6.1 GB) | [hs37d5](ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz) |
@@ -22,7 +22,7 @@ All reference files should be pre-processed with `ref.py`, as explained in the [
 ### FASTQ Samples
 
 | Organism | Technology | Coverage | Uncompressed size | Link | Reference |
-|-|-|-|-|-|
+|-----|------|-------|-------|--------|------|
 | *P.aeruginosa* | Illumina GAIIx | 105x | 1 GB | [SRR554369_1](ftp://ftp.ddbj.nig.ac.jp/ddbj_database/dra/fastq/SRA058/SRA058002/SRX181937/SRR554369_1.fastq.bz2)<sup> 1</sup> (119 MB) <br> [SRR554369_2](ftp://ftp.ddbj.nig.ac.jp/ddbj_database/dra/fastq/SRA058/SRA058002/SRX181937/SRR554369_2.fastq.bz2) (120 MB) | [NC_002516.2](http://www.ncbi.nlm.nih.gov/nuccore/110645304?report=fasta) |
 | *E.coli* | PacBio | 5x | 1.3 GB | [SRR1284073](ftp://ftp.ddbj.nig.ac.jp/ddbj_database/dra/sralite/ByExp/litesra/SRX/SRX533/SRX533603)<sup> 3</sup> (2.2 GB) | [Arabidopsis](http://datasets.pacb.com.s3.amazonaws.com/2014/Arabidopsis/reads/polished_assembly.fasta) |
 | *H.sapiens* gut | Illumina GAII | Unknown | 3.6 GB | [MH0001_081026_clean.1](http://public.genomics.org.cn/BGI/gutmeta/High_quality_reads/MH0001/081026/MH0001_081026_clean.1.fq.gz)<sup> 2</sup> (478 MB) <br> [MH0001_081026_clean.2](http://public.genomics.org.cn/BGI/gutmeta/High_quality_reads/MH0001/081026/MH0001_081026_clean.2.fq.gz) (550 MB) | [hg19](http://hgdownload.cse.ucsc.edu/goldenpath/hg19/bigZips/chromFa.tar.gz) |
