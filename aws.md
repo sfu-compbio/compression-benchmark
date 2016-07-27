@@ -2,13 +2,23 @@
 
 ### Instance creation
 
-For testing purposes, we recommend using either VirtualBox or VMware image, or firing up Ubuntu EC2 t2.micro instance on AWS. For real benchmarking, it is recommended to use dedicated instance with high I/O performance and lots of available RAM and disk space.
+For testing purposes, we recommend using either [Vagrant](https://www.vagrantup.com) with [VirtualBox](https://www.virtualbox.org) image, or firing up Ubuntu EC2 t2.micro instance on [Amazon Web Services E2](https://aws.amazon.com/ec2/) (AWS). On the other hand, it is recommended to use dedicated instance with high I/O performance and lots of available RAM and disk space for real, camera-ready benchmarking.
 
 > For now, some tools are having problems running on t2.micro node on AWS (e.g. SCALCE, Fastqz, DeeZ etc.). We are looking into this issue.
 
 ### Initial set-up
 
-First launch your Ubuntu instance, and set up necessary dependencies as follows (assuming you are using Ubuntu 14.04):
+First launch your Ubuntu instance, either via AWS control panel, or by invoking:
+
+```
+mkdir benchmarking
+cd benchmarking
+vagrant init ubuntu/trusty64
+vagrant up
+vagrant ssh
+```
+
+Now, set up necessary dependencies as follows (assuming you are using Ubuntu 14.04):
 
 ```
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
