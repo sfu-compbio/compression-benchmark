@@ -6,7 +6,7 @@ This is a set of scripts used for measuring the performance of high-throughput s
 
 Please refer to the following documents for a detailed guide how to run benchmarks yourself.
 
-- [Amazon Web Services (AWS) Quickstart](aws.md)
+- [Benchmarking Quickstart](aws.md)
 - [Usage](usage.md)
 - [Data Samples](samples.md)
 - [Tools](https://github.com/sfu-compbio/compression-benchmark-tools/)
