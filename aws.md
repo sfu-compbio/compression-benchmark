@@ -13,7 +13,7 @@ First launch your Ubuntu instance, and set up necessary dependencies as follows 
 ```
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 sudo apt-get update
-sudo apt-get install make git gcc g++ gcc-5 g++-5 libtbb2 libz-dev libbz2-dev libcurl4-openssl-dev default-java
+sudo apt-get install make git gcc g++ gcc-5 g++-5 libtbb2 libz-dev libbz2-dev libcurl4-openssl-dev default-jre
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5
 ```
 
