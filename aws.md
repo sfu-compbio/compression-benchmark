@@ -28,21 +28,44 @@ cp compression-benchmark-tools/tools.py compression-benchmark/tools.py
 
 ### Benchmarking
 
+Before you start, it is recommended to add a `tools` directory to your `PATH`:
+
+```
+export PATH=${PATH}:../tools
+```
+
 First, prepare the reference file in FASTQ format for various tools:
 
 ```
 # In this example, reference is called "test.fa"
 cd compression-benchmark/sample
-PATH=${PATH}:../tools ../ref.py test.fa
+../ref.py test.fa
+```
+
+You should end up with the following files:
+
+```
+$ ls -l
+test.fa  test.fa.cbc  test.fa.fai
+
+test.fa.sc:
+EcoliDH10B.fa.fa
 ```
 
 Now you can fire up benchmark suite by running:
 
 ```
 # Enter
-cd compression-benchmark
+cd .. # or cd compression-benchmark if you are in your root directory
 # Evaluate sample SAM file "test_sam.sam"
 python benchmark.py -i sample/test_sam.sam -r sample/test.fa
 # Evaluate sample FASTQ file "test_sam.sam"
 python benchmark.py -i sample/test_fq.fq -r sample/test.fa
 ```
+
+The results will be placed in `test_sam` and `test_fq` directories for `test_sam.sam` and `test_fq.fq` respectively.
+Within those directories, you will find:
+
+- `benchmark.log_<date>`: detailed log about each run
+- `log/`: output of executed commands for each tool
+- `output/`: compressed and decompressed files produced by evaluated tools
