@@ -22,9 +22,14 @@ Now, set up necessary dependencies as follows (assuming you are using Ubuntu 14.
 
 ```
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
-sudo apt-get install make git gcc g++ gcc-5 g++-5 libtbb2 libz-dev libbz2-dev libcurl4-openssl-dev default-jre
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bin/g++ g++ /usr/bin/g++-5
+sudo apt-get install make git gcc g++ gcc-5 g++-5 libtbb2 libz-dev \
+  libbz2-dev libcurl4-openssl-dev default-jre lzip plzip ruby2.2 \
+  ruby-switch libc6-dev-i386 g++-multilib gdb
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 \
+  --slave /usr/bin/g++ g++ /usr/bin/g++-5
+sudo ruby-switch --set ruby2.2
 ```
 
 Afterwards, clone our benchmark repositories and set up default tool configuration as follows:
@@ -79,3 +84,17 @@ Within those directories, you will find:
 - `benchmark.log_<date>`: detailed log about each run
 - `log/`: output of executed commands for each tool
 - `output/`: compressed and decompressed files produced by evaluated tools
+
+## Known issues and caveats
+
+By default, test script will run all tools in single-threaded mode. Additionaly, many tools require *quite a lot of memory*, if run with default settings. This might cause them to stop working on low-memory instances (e.g. default Vagrant configuration or AWS t2.micro instance). Known tools which might stop working are sam_comp, Fqzcomp, SCALCE, DeeZ, Mince etc.
+
+Many tools also use hard-coded paths to some executables. Some are also not able to compress or decompress any file lying outside the executable directory, or having "wrong" extension. In addition, some tools consist of multiple stages. We have tried to fix those shortcomings, and binaries provided here incorporate those fixes. In order to make such tools compatible with our benchmarking system, we have added multiple Bash scripts for problematic tools. For example, Orcom or LW-FQZip are invoked via `orcom.sh` and `lwfqzip.sh` recpectively.
+
+Few caveats we have observed so far:
+
+- CBC fails on decompression
+- LFQC might require recompilation of `zpaq` and `lpaq` binaries. In addition to that, `lpaq` cannot compress files larger than 2 GB.
+- SCALCE by default allocates 4 GB buckets. For low-memory systems (e.g. AWS t2.micro instance), we tuned the bucket allocation size to 1 GB with `-B 1G` parameter. Note that this will affect its compression performance; run SCALCE without this parameter in real-world benchmarking.
+- DeeZ uses SSE 4.1 for faster execution. The version provided here is compiled with SSE 4.1 support; it might not work on systems without SSE 4.1 support. Also, the version used for benchmarking is bit behind the current GitHub release, and is not intended to be used in production environments.
+- KIC and k-Path do not support single-threaded mode. You need to add at least `-t 2` to `benchmark.py` to be able to run those tools.
