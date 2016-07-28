@@ -44,7 +44,7 @@ cp compression-benchmark-tools/tools.py compression-benchmark/tools.py
 Before you start, it is recommended to add a `tools` directory to your `PATH`:
 
 ```
-export PATH=${PATH}:../tools
+export PATH=${PATH}:`pwd`/compression-benchmark-tools/tools
 ```
 
 First, prepare the reference file in FASTQ format for various tools:
