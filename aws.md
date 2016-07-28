@@ -1,4 +1,4 @@
-# Benchmarking Quickstart
+# Benchmarking (Quickstart)
 
 ### Instance creation
 
@@ -74,8 +74,12 @@ Now you can fire up benchmark suite by running:
 cd .. # or cd compression-benchmark if you are in your root directory
 # Evaluate sample SAM file "test_sam.sam"
 python benchmark.py -i sample/test_sam.sam -r sample/test.fa
-# Evaluate sample FASTQ file "test_sam.sam"
+# Evaluate sample FASTQ file "test_fq.fq"
 python benchmark.py -i sample/test_fq.fq -r sample/test.fa
+# Evaluate paired-end FASTQ sample "test_fq_1.fq"
+python benchmark.py -i sample/test_fq_1.fq -r sample/test.fa
+# Evaluate sample SAM file "test_sam.sam" with 4 threads and cache reset
+sudo python benchmark.py -i sample/test_sam.sam -r sample/test.fa -t 4 -C
 ```
 
 The results will be placed in `test_sam` and `test_fq` directories for `test_sam.sam` and `test_fq.fq` respectively.
