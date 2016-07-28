@@ -16,6 +16,8 @@ vagrant up
 vagrant ssh
 ```
 
+We suggest editing your `Vagrantfile` and adding 4 GB of memory to the virtual machine.
+
 Now, set up necessary dependencies as follows (assuming you are using Ubuntu 14.04):
 
 ```
