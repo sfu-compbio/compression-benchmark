@@ -290,7 +290,7 @@ def getrevcmp(path):
 		r = ".2"
 	if f != -1:
 		path2 = os.path.dirname(path) + '/' + p[:f] + r + p[f + 2:]
-		print path2
+		#print path2
 		if os.path.isfile(path2):
 			return path2
 		return ''
