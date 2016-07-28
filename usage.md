@@ -31,6 +31,7 @@ Please check the directory `sample` for sample output.
  - `--copy/-c`
 
     Copy the input files in the current directory. Useful if your data is on NFS drives.
+    
     **BUG WARNING**: for paired-end data, you will need to manually copy second paired-end file. We plan to update our script to do this automatically later.
 
  - `--rt/-R`
