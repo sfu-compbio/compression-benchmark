@@ -16,6 +16,7 @@ def mkdir(path):
 
 ref = sys.argv[1]
 os.system('samtools faidx {}'.format(ref))
+os.system('cat {0} | gzip -c > {0}.gz'.format(ref))
 
 mkdir('{}.sc'.format(ref))
 fo = 0

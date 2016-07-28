@@ -5,7 +5,7 @@ sam = [
 			"cmd": 		"pigz",
 			"cmparg": 	"-c -p {threads}",
 			"decarg":	"-c -d -p {threads}",
-			"stdin":	"{in}",
+			"stdin":		"{in}",
 			"stdout":	"{out}",
 			"ext":		"gz"	
 		}
@@ -16,7 +16,7 @@ sam = [
 			"cmd": 		"pbzip2",
 			"cmparg": 	"-c -p{threads}",
 			"decarg":	"-c -d -p{threads}",
-			"stdin":	"{in}",
+			"stdin":		"{in}",
 			"stdout":	"{out}",
 			"ext":		"bz2"	
 		}
@@ -59,7 +59,7 @@ sam = [
 			"cmd": 		"sam_comp",
 			"cmparg": 	"-r {ref}.sc",
 			"decarg":	"-d -r {ref}.sc",
-			"stdin":	"{in}",
+			"stdin":		"{in}",
 			"stdout":	"{out}",
 			"ext":		"zam"
 		},
@@ -128,7 +128,7 @@ fastq = [
 			"cmd": 		"pigz",
 			"cmparg": 	"-c -p {threads}",
 			"decarg":	"-c -d -p {threads}",
-			"stdin":	"{in}",
+			"stdin":		"{in}",
 			"stdout":	"{out}",
 			"ext":		"gz",
 			"paired":	True,
@@ -140,7 +140,7 @@ fastq = [
 			"cmd": 		"pbzip2",
 			"cmparg": 	"-c -p{threads}",
 			"decarg":	"-c -d -p{threads}",
-			"stdin":	"{in}",
+			"stdin":		"{in}",
 			"stdout":	"{out}",
 			"ext":		"bz2",
 			"paired":	True,
@@ -150,9 +150,10 @@ fastq = [
 		"name": "scalce",
 		"params": {
 			"cmd": 		"scalce",
-			"cmparg": 	"-T {threads} {in} -o {out}",
+			"cmparg": 	"-T {threads} {in} -o {out} -B 1G",
 			"revcmp":	"-r",
-			"decarg":	"-d -r -T {threads} {in}_1.scalcer -o {out}",
+			"decarg":	"-d -T {threads} {in}_1.scalcer -o {out}",
+			"decrevcmp":"-r",
 			"ext":		"scalce",
 			"paired":	True,
 		}
@@ -161,18 +162,18 @@ fastq = [
 		"name": "scalce-single",
 		"params": {
 			"cmd": 		"scalce",
-			"cmparg": 	"-T {threads} {in} -o {out}",
+			"cmparg": 	"-T {threads} {in} -o {out} -B 1G",
 			"decarg":	"-d -T {threads} {in}_1.scalcer -o {out}",
 			"ext":		"scalce-single",
 			"paired":	False,
-			"multi":	True,
+			"multi":		True,
 		}
 	},
 	{
 		"name": "dsrc",
 		"params": {
 			"cmd": 		"dsrc",
-			"cmparg": 	"c -v -t{threads} {mode} {in} {out}",
+			"cmparg": 	"c -v -t{threads} {cmpmode} {in} {out}",
 			"decarg":	"d -v -t{threads} {in} {out}",
 			"ext":		"dsrc",
 			"modes": {
@@ -210,7 +211,7 @@ fastq = [
 		"name": "fqzcomp",
 		"params": {
 			"cmd": 		"fqzcomp",
-			"cmparg": 	"{mode} -P {in} {out}", # P ~ no multith
+			"cmparg": 	"{cmpmode} -P {in} {out}", # P ~ no multith
 			"decarg":	"-d -P {in} {out}",
 			"ext":		"fqz",
 			"modes": {
@@ -274,9 +275,9 @@ fastq = [
 	{
 		"name": "fqc",
 		"params": {
-			"cmd": 		"fqc",
-			"cmparg": 	"-c -i {in} -o {out}",
-			"decarg":	"-d -i {in} -o {out}",
+			"cmd": 		"fqc.sh",
+			"cmparg": 	"e {in} {out}",
+			"decarg":	"d {in} {out}",
 			"ext":		"fqc",
 			"paired":	True,
 			"multi":    False,
@@ -285,10 +286,10 @@ fastq = [
 	{
 		"name": "mince",
 		"params": {
-			"cmd": 		"mince",
-			"cmparg": 	"-p {threads} -e -1 {in} -o {out}",
-			"revcmp":   "-2 {revcmp}",
-			"decarg":	"-d -p {threads} -i {in} -o {out}",
+			"cmd": 		"mince.sh",
+			"cmparg": 	"e {in} {out} {threads}",
+			"decarg":	"d {in} {out} {threads}",
+			"revcmp":   "{revcmp}",
 			"ext":		"mince",
 			"paired":	True,
 			"multi":    False,
@@ -297,9 +298,9 @@ fastq = [
 	{
 		"name": "mince-single",
 		"params": {
-			"cmd": 		"mince",
-			"cmparg": 	"-p {threads} -e -r {in} -o {out}",
-			"decarg":	"-d -p {threads} -i {in} -o {out}",
+			"cmd": 		"mince.sh",
+			"cmparg": 	"e {in} {out} {threads}",
+			"decarg":	"d {in} {out} {threads}",
 			"ext":		"mince",
 			"paired":	False,
 			"multi":    False,
@@ -317,25 +318,25 @@ fastq = [
 		}
 	},
 	{
-			"name": "kic",
-			"params": {
-				"cmd":          "kic.sh",
-				"cmparg":       "e {in} {out} {threads}",
-				"decarg":       "d {in} {out} {threads}",
-				"ext":          "kic",
-				"paired":       True,
-				"multi":        False,
-				}
-			},
+		"name": "kic",
+		"params": {
+			"cmd":		"kic.sh",
+			"cmparg":	"e {in} {out} {threads}",
+			"decarg":	"d {in} {out} {threads}",
+			"ext":		"kic",
+			"paired":	True,
+			"multi":		False,
+		}
+	},
 	{
-			"name": "beetl",
-			"params": {
-				"cmd":          "beetl.sh",
-				"cmparg":       "e {in} {out} 1",
-				"decarg":       "d {in} {out} 1",
-				"ext":          "beetl",
-				"paired":       True,
-				"multi":    False,
-				}
-			},
-	]
+		"name": "beetl",
+		"params": {
+			"cmd":		"beetl.sh",
+			"cmparg":	"e {in} {out} 1",
+			"decarg":	"d {in} {out} 1",
+			"ext":		"beetl",
+			"paired":	True,
+			"multi":    False,
+		}
+	},
+]

@@ -67,7 +67,6 @@ def execute(cmd, fin, fout, ferr, exclusive=False, single_thread=False):
 	if single_thread: # bind to cpu #3 by default
 		cmd = 'taskset 1 ' + cmd
 	cmd = '/usr/bin/time -p -o _time_ ' + cmd
-	print cmd, '<', fi, '>', fo
 
 	global proc
 	proc = sp.Popen(shlex.split(cmd), stdin=fi, stdout=fo, stderr=fe, env=os.environ.copy())
@@ -109,7 +108,6 @@ def signal_handler(signal, frame):
 
 def is_glob(f):
 	p = glob.glob(f)
-	print p
 	return len(p) != 1 or p[0] != f
 
 def run_tool(sample_name, input_file, input_glob, tool_name, tool_params, params, args, output_extension):
@@ -247,8 +245,18 @@ def run(sample_name, tools, args, threads, param_fn):
 			name, params = tool['name'], tool['params']
 			if m != '': name += '-' + m
 
-			if '{mode}' not in params['cmparg']:
-				params['cmparg'] += ' {mode}'
+			cmpmode = ''
+			decmode = ''
+			if '{cmpmode}' not in params['cmparg']:
+				params['cmparg'] += ' {cmpmode}'
+			if '{decmode}' not in params['decarg']:
+				params['decarg'] += ' {decmode}'
+			# support for decompression mode arguments
+			if isinstance(mode_params, list) and len(mode_params) > 1:
+				cmpmode = mode_params[0]
+				decmode = mode_params[1]
+			elif not isinstance(mode_params, list):
+				cmpmode = mode_params
 
 			if name[:4] == 'quip':
 				if threads != 4:
@@ -261,36 +269,43 @@ def run(sample_name, tools, args, threads, param_fn):
 			input_params = {
 				'ref': args.ref,
 				'threads': threads,	
-				'mode': mode_params,
+				'cmpmode': cmpmode,
+				'decmode': decmode,
 			}
 
 			(input_files, output_extension, glob) = param_fn(args, tool, input_params)
 			for input_index, input_file in enumerate(input_files):
 				print ">>> {} (File {}: {})".format(name, input_index + 1, input_file)
-				input_params['mode'] = input_params['mode'].format(**input_params)
+				input_params['cmpmode'] = input_params['cmpmode'].format(**input_params)
+				input_params['decmode'] = input_params['decmode'].format(**input_params)
 				run_tool(sample_name, input_file, glob, name, params, input_params, args, output_extension)
 
-def get_fastq_params(args, tool, params):
-	def getrevcmp(path):
-		p = os.path.basename(path)
-		f = p.rfind("_1")
-		r = "_2"
-		if f == -1:
-			f = p.rfind(".1")
-			r = ".2"
-		if f != -1:
-			path2 = os.path.dirname(path) + '/' + p[:f] + r + p[f + 2:]
-			if os.path.isfile(path2):
-				return path2
-			return ''
+
+def getrevcmp(path):
+	p = os.path.basename(path)
+	f = p.rfind("_1")
+	r = "_2"
+	if f == -1:
+		f = p.rfind(".1")
+		r = ".2"
+	if f != -1:
+		path2 = os.path.dirname(path) + '/' + p[:f] + r + p[f + 2:]
+		print path2
+		if os.path.isfile(path2):
+			return path2
 		return ''
+	return ''
+
+def get_fastq_params(args, tool, params):
 	infiles = [ args.input ]
 	if args.glob == '':
 		input_glob = ''
 		infilerev = getrevcmp(infiles[0]) if tool['params']['paired'] else ''
 		if infilerev != '':
 			if 'revcmp' in tool['params']:
-				params['mode'] += ' ' + tool['params']['revcmp'].format(revcmp=infilerev)
+				params['cmpmode'] += ' ' + tool['params']['revcmp'].format(revcmp=infilerev)
+			if 'decrevcmp' in tool['params']:
+				params['decmode'] += ' ' + tool['params']['decrevcmp'].format(revcmp=infilerev)
 			else: 
 				infiles.append(infilerev)
 	else:
@@ -301,7 +316,7 @@ def get_fastq_params(args, tool, params):
 	return (infiles, 'fq', input_glob)
 
 def get_fasta_params(arg, tools, params):
-	return (get_fastq_params(arg, tool, params)[0], 'fa')
+	return (get_fastq_params(arg, tools, params)[0], 'fa')
 
 def get_sam_params(args, tool, params):
 	return ([ args.input ], 'sam', '')
@@ -315,6 +330,7 @@ def getargs():
  	parser.add_argument('--rt', '-R', action='store_true', help='Use SCHED_FIFO real-time priority (requires root)')
  	parser.add_argument('--clear-cache', '-C', action='store_true', help='Clear filesystem cache before tests (requires root)')
  	parser.add_argument('--output-dir', '-o', default='', help="Move output to this directory after finished decompression")
+ 	parser.add_argument('--copy', '-c', action='store_true', help='Copy input files to the current directory first')
  	parser.add_argument('--email', '-e', default='')
  	parser.add_argument('--threads', '-t', default='1')
 	return parser.parse_args()
@@ -326,16 +342,17 @@ arg = getargs()
 
 #callcmd('service puppet stop')
 
-new_input = '{}/{}'.format(os.getcwd(), os.path.basename(arg.input))
-if not os.path.isfile(new_input):
-	print 'Copying new file...'
-	shutil.copy(arg.input, os.getcwd())
-vars(arg)['input'] = new_input
+if arg.copy: # TODO copy reverse complement!
+	new_input = '{}/{}'.format(os.getcwd(), os.path.basename(arg.input))
+	if not os.path.isfile(new_input):
+		print 'Copying new file...'
+		shutil.copy(arg.input, os.getcwd())
+	vars(arg)['input'] = new_input
 
 if arg.ref != '':
 	vars(arg)['ref'] = os.path.abspath(arg.ref)
 
-sample_name, sample_ext = os.path.splitext(os.path.basename(new_input))
+sample_name, sample_ext = os.path.splitext(os.path.basename(arg.input))
 if len(sample_ext) > 1:
 	sample_ext = sample_ext[1:]
 if sample_ext in [ 'fastq', 'fq' ]:
@@ -355,7 +372,7 @@ elif sample_ext in [ 'sam' ]:
 	tools = tools.sam
 	print 'Detected SAM file'
 else:
-	print 'Unknown file format for: {}'.format(new_input)
+	print 'Unknown file format for: {}'.format(arg.input)
 	exit(1)
 
 if arg.output_dir != '':
