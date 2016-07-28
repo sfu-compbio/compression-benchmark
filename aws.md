@@ -1,4 +1,4 @@
-# Benchmarking (Virtualization or Amazon Web Services)
+# Benchmarking Quickstart
 
 ### Instance creation
 
