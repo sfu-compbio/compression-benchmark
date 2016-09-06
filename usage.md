@@ -1,8 +1,8 @@
 # Usage
 
-All Python scripts require at least Python 2.7.
+All Python scripts require at least Python 2.7. Help for utilities is located in [utilities.md](utilities/utilities.md).
 
-## benchmark.py
+### benchmark.py
 
 This script performs the evaluation of the tools specified in `tools.py` file on a given dataset.
 
@@ -65,7 +65,7 @@ Please check the directory `sample` for sample output.
     Evaluates `test_fq.fq` with reference file `test.fa` in single-threaded mode. No e-mail will be sent.
 
 
-## ref.py
+### ref.py
 
 This script will prepare the references for the following tools:
 
@@ -78,56 +78,3 @@ It requires Samtools to be available in `PATH`.
 #### Invocation:
 
     ref.py <reference.fa>
-
-
-## columnar.cc
-
-This tool prints per-column compression ratio of Gzip and bzip2 for FASTQ and BAM/SAM files.
-
-#### Compilation:
-
-	g++ -std=c++11 -lz -lbz2 -O3 columnar.cc -o columnar
-
-
-#### Invocation:
-
-    columnar <file.fq or file.sam>
-
-#### Sample output:
-
-First column describes the size of raw ASCII column. Second column describes the size of Gzip-compressed column, while third describes the bzip2-compressed size.
-
-##### SAM:
-
-    $ columnar test_sam.sam
-    SAM file test_sam.sam
-    test_sam.sam
-    LINES:                 9996
-     HEAD:                  185                  171                  204
-    QNAME:               177289                50206                44664
-     FLAG:                24970                 4479                 3652
-      REF:               129948                  295                   89
-      POS:                36613                 6351                 7906
-     MAPQ:                29962                  263                  209
-    CIGAR:                40041                  175                  140
-    RNEXT:                 9996                  352                  343
-    PNEXT:                36337                16570                15224
-     TLEN:                34338                14547                12633
-      SEQ:              1499400                41113                53511
-     QUAL:              1499400               685964               608293
-       OF:               660584                81314                52321
-
-    SIZE: 4299019
-
- ##### FASTQ:
-
-    $ columnar test_fq.fq
-    FASTQ file test_fq.fq
-    test_fq.fq
-    RECORDS:                 9996
-    RNAME:               187285                50563                44677
-      SEQ:              1499400                41113                53511
-      AUX:                 9996                   35                   45
-     QUAL:              1499400               685964               608293
-
-    SIZE: 3236065
