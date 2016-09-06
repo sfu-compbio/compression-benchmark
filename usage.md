@@ -1,6 +1,6 @@
 # Usage
 
-All Python scripts require at least Python 2.7. Help for utilities is located in [utilities.md](utilities/utilities.md).
+All Python scripts require at least Python 2.7. Help for utilities is located in directory [utilities/](utilities/).
 
 ### benchmark.py
 
