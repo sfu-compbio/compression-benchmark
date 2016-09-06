@@ -173,11 +173,11 @@ int main (int argc, char **argv)
 		while (1) {
 			if (CALC_MISSING) {
 				while (iA < A.size() && (iB == B.size() || A[iA] < B[iB])) { 
-					L("Skipping block %lu from file 1: %s", lineA, A[iA].content.c_str());
+					//L("Skipping block %lu from file 1: %s", lineA, A[iA].content.c_str());
 					missB++, iA++, lineA++;
 				}
 				while (iB < B.size() && (iA == A.size() || B[iB] < A[iA])) {
-					L("Skipping block %lu from file 2: %s", lineB, B[iB].content.c_str());
+					//L("Skipping block %lu from file 2: %s", lineB, B[iB].content.c_str());
 					missA++, iB++, lineB++;
 				}
 			}
@@ -186,17 +186,6 @@ int main (int argc, char **argv)
 			/* 	Assume that they are equal
 				Due to the speed concerns, we won't do any matching... */
 			for (int i = 0; i < 5; i++) {
-				/*if (i == 1 && strcmp(A[iA].content.c_str() + A[iA].fields[i], B[iB].content.c_str() + B[iB].fields[i])) {
-					string rc = B[iB].content.c_str() + B[iB].fields[i];
-					for (auto &c: rc) c = revcmp(c);
-					reverse(rc.begin(), rc.end());
-
-					if (!strcmp(A[iA].content.c_str() + A[iA].fields[i], rc.c_str())) {
-						numRCd++;
-						continue;
-					}
-				} */
-
 				if (i == 1 || i == 3) { // Seq, Qual
 					int la = strlen(A[iA].content.c_str()+ A[iA].fields[i]);
 					int lb = strlen(B[iB].content.c_str()+ B[iB].fields[i]);
