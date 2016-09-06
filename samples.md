@@ -40,9 +40,9 @@ All reference files should be pre-processed with `ref.py`, as explained in the [
 
 Coverage was calculated by dividing a total number of nucleotides in SAM or FASTQ file with the rounded 
 reference genome size. These numbers are not intended to be exact, but more as a rough estimate of a coverage 
-of the given sample.
+in the given sample.
 
-Thw following reference genome sizes were used:
+The following reference genome sizes were used:
 
 | Organism | Size |
 |-----|------|
