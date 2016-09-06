@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # 786
 
-import os, sys, errno, argparse, subprocess as sp, fnmatch, struct, time, datetime, glob, signal, tempfile, shutil, shlex
+import os, sys, errno, argparse, subprocess as sp, time, datetime, glob, signal, shutil, shlex
 import tools
 
 class Logger(object):
@@ -110,7 +110,7 @@ def is_glob(f):
 	p = glob.glob(f)
 	return len(p) != 1 or p[0] != f
 
-def run_tool(sample_name, input_file, input_glob, tool_name, tool_params, params, args, output_extension):
+def run_tool(sample_name, input_file, file_id, input_glob, tool_name, tool_params, params, args, output_extension):
 	threads = params['threads']
 	input_name = os.path.basename(input_file)
 	control_dir = '{}/control'.format(sample_name)
@@ -140,8 +140,8 @@ def run_tool(sample_name, input_file, input_glob, tool_name, tool_params, params
 			params['in'] = params['out']
 			params['out'] = '{}/decompressed/{}/{}.{}'.format(output_dir, tool_name, input_name, output_extension)
 			
-		fe = '{}/{}.{}.{}.{}.log'.format(log_dir, input_name, tool_name, threads, mode)
-		fo = '{}/{}.{}.{}.{}.out'.format(log_dir, input_name, tool_name, threads, mode)
+		fe = '{}/{}.{}.{}.{}'.format(log_dir, file_id, tool_name, threads, mode)
+		fo = '{}/{}.{}.{}.{}.out'.format(log_dir, file_id, tool_name, threads, mode)
 		if 'stdout' in tool_params:
 			fo = tool_params['stdout'].format(**params)
 		fi = ''
@@ -278,10 +278,11 @@ def run(sample_name, tools, args, threads, param_fn):
 				print ">>> {} (File {}: {})".format(name, input_index + 1, input_file)
 				input_params['cmpmode'] = input_params['cmpmode'].format(**input_params)
 				input_params['decmode'] = input_params['decmode'].format(**input_params)
-				run_tool(sample_name, input_file, glob, name, params, input_params, args, output_extension)
+				run_tool(sample_name, input_file, input_index + 1, glob, name, params, input_params, args, output_extension)
 
 
 def getrevcmp(path):
+	path = os.path.abspath(path)
 	p = os.path.basename(path)
 	f = p.rfind("_1")
 	r = "_2"
@@ -325,7 +326,7 @@ def getargs():
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--input', '-i', help="Input file for sample (FASTQ, FASTA or SAM)")
 	parser.add_argument('--glob', '-g', default='', help="Input files glob for multi-FASTQ samples (NOT SUPPORTED!)")
-	parser.add_argument('--ref', '-r', help="Folder containing reference files")
+	parser.add_argument('--ref', '-r', help="Reference file")
 	parser.add_argument('--force', '-f', action='store_true', help="Re-run all tools")
  	parser.add_argument('--rt', '-R', action='store_true', help='Use SCHED_FIFO real-time priority (requires root)')
  	parser.add_argument('--clear-cache', '-C', action='store_true', help='Clear filesystem cache before tests (requires root)')
@@ -340,7 +341,8 @@ signal.signal(signal.SIGINT, signal_handler)
 ts = time.time()
 arg = getargs()
 
-#callcmd('service puppet stop')
+# Uncomment if you need to disable background services on CentOS
+# callcmd('service puppet stop')
 
 if arg.copy: # TODO copy reverse complement!
 	new_input = '{}/{}'.format(os.getcwd(), os.path.basename(arg.input))
@@ -349,7 +351,7 @@ if arg.copy: # TODO copy reverse complement!
 		shutil.copy(arg.input, os.getcwd())
 	vars(arg)['input'] = new_input
 
-if arg.ref != '':
+if arg.ref is not None and arg.ref != '':
 	vars(arg)['ref'] = os.path.abspath(arg.ref)
 
 sample_name, sample_ext = os.path.splitext(os.path.basename(arg.input))

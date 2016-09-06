@@ -304,6 +304,11 @@ int main (int argc, char **argv)
 {
 	std::ios_base::sync_with_stdio(false);
 
+	if (argc != 2) {
+		fprintf(stderr, "Usage: columnar <file.fq|file.sam|file.bam>\n", argv[1]);
+		return 1;
+	}
+
 	ifstream in(argv[1], ifstream::ate | ifstream::binary);
 	if (!in.is_open()) {
 		fprintf(stderr, "File %s is not valid file!\n", argv[1]);
