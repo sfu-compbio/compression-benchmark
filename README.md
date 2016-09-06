@@ -9,11 +9,10 @@ Please refer to the following documents for a detailed guide how to run benchmar
 - [Benchmarking Quickstart](aws.md)
 - [Usage](usage.md)
 - [Data Samples](samples.md)
-- [Tools](https://github.com/sfu-compbio/compression-benchmark-tools/)
+- [Tools](https://github.com/sfu-compbio/compression-benchmark-tools)
+- [Results](https://github.com/sfu-compbio/compression-benchmark-data)
 
 A comprehensive database of available benchmarks is available [here](https://sfu-compbio.github.io/compression-benchmark-data/).
-
-Data dumps are available at [compression-benchmark-data repository](https://github.com/sfu-compbio/compression-benchmark-data)
 
 ## Contact
 
