@@ -87,7 +87,7 @@ size_t readfile(FILE *f, vector<Record> &vec, string &comment) {
 int main (int argc, char **argv) 
 {
 	std::ios_base::sync_with_stdio(false);
-	if (argc != 3) {
+	if (argc != 4) {
 		E("Usage: samcmp <original> <copy> <maxline>");
 		exit(1);
 	}
