@@ -2,6 +2,8 @@
 
 This is a set of scripts used for measuring the performance of high-throughput sequencing compression tools (i.e. tools compressing FASTQ or SAM files).
 
+It has been published in [Nature Methods (2016)](http://www.nature.com/nmeth/journal/vaop/ncurrent/full/nmeth.4037.html).
+
 ## Tutorials
 
 Please refer to the following documents for a detailed guide how to run benchmarks yourself.
